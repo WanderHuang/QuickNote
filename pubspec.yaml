@@ -1,0 +1,25 @@
+name: quick_note
+description: Quick note down your idea.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_calendar_carousel: any
+
+  cupertino_icons: ^0.1.2
+  flutter_bloc: ^0.4.6
+  sqflite: ^0.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
