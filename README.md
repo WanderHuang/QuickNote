@@ -1,4 +1,4 @@
-# QuickNote - [_中文_](!/README_zh.md)
+# QuickNote - [_中文_](/README_zh.md)
 A Flutter TODOLIST app demo. Made by [wander](!https://github.com/WanderHuang).
 
 ## Flutter Development Environment
