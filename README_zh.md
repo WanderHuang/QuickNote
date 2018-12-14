@@ -1,4 +1,4 @@
-# QuickNote - [_Toggle to English_](!https://github.com/WanderHuang/QuickNote/blob/master/README.md)
+# QuickNote - [_Toggle to English_](/README.md)
 用Flutter构建的TODOLIST应用. Made by [wander](!https://github.com/WanderHuang)。你可以把这个项目当做一个上手Flutter的初始化项目，我给您规划好了目录结构，开发起来应该是比较流畅的。  
 就我个人来讲，服务层开发像是java，界面层开发像是vue或者react，这就够了。了解了前面这些，入门Flutter应该是很快的，但是一个新模式，最重要的还是经验，写的多，踩坑多，思考多，那做起来会很舒服的。
 
