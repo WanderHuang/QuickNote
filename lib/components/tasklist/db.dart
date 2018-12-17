@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:quick_note/database/db_manager.dart';
 import 'package:quick_note/models/task.dart';
-import 'package:quick_note/constants/index.dart' show dbTableName, dbTaskId, dbTaskDate, dbTaskDetail, dbTaskTitle;
+import 'package:quick_note/constants/index.dart' show dbTableName, dbTaskId, dbTaskDate, dbTaskContent, dbTaskLevel, dbTaskMarked;
 /// Task database operations
 class TaskDbManager {
   static Future<bool> delete(int id) async {
@@ -36,7 +36,7 @@ class TaskDbManager {
     Database db = await DataBaseManager.get().getDatabase();
     try {
       await db.transaction((Transaction transaction) async {
-        await transaction.rawInsert('INSERT INTO $dbTableName($dbTaskTitle,$dbTaskDetail,$dbTaskDate) VALUES("${item.title}", "${item.detail}", "${item.date}");');
+        await transaction.rawInsert('INSERT INTO $dbTableName($dbTaskContent,$dbTaskDate,$dbTaskLevel,$dbTaskMarked) VALUES("${item.content}", "${item.date}", "${item.level}", "${item.marked}");');
       });
     } catch (e) {
       print('INSERT ERROR');
@@ -50,7 +50,7 @@ class TaskDbManager {
     Database db = await DataBaseManager.get().getDatabase();
     try {
       await db.transaction((Transaction transaction) async {
-        await transaction.rawInsert('UPDATE $dbTableName SET $dbTaskTitle = "${item.title}", $dbTaskDetail = "${item.detail}", $dbTaskDate = "${item.date}" WHERE $dbTaskId = ${item.id}');
+        await transaction.rawInsert('UPDATE $dbTableName SET $dbTaskContent = "${item.content}", $dbTaskDate = "${item.date}", $dbTaskLevel = "${item.level}", $dbTaskMarked = "${item.marked}" WHERE $dbTaskId = ${item.id}');
       });
     } catch (e) {
       print('UPDATE ERROR');

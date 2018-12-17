@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute<bool>(builder: (context) {
               return BlocProvider(
                 bloc: TaskBloc.instance, // new page, but logic is managed by todoListBloc
-                child: TaskPage(null),
+                child: TaskEditPage(null),
               );
             }),
           );
@@ -44,31 +44,6 @@ class HomePage extends StatelessWidget {
               'This is slider'
             )
           ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 55.0,
-        child: BottomAppBar(
-          color: Colors.cyan[500],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home),
-                color: Colors.white,
-                highlightColor: Colors.red,
-                onPressed: () {
-                  print('this is home');
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.calendar_view_day, color: Colors.white),
-                onPressed: () {
-                  print('this is calendar');
-                }
-              )
-            ],
-          ),
         ),
       ),
     );
