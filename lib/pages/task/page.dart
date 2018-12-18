@@ -4,6 +4,7 @@ import 'package:quick_note/components/tasklist/index.dart' show TaskBloc;
 import 'package:quick_note/models/task.dart';
 import 'package:quick_note/components/dialog/warn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quick_note/components/circlebutton/index.dart';
 
 /// the page you create or update your task
 class TaskEditPage extends StatefulWidget {
@@ -80,29 +81,42 @@ class TaskEditState extends State<TaskEditPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => SimpleDialog(
-              children: _getColorfulPanel(),
-            )
-          ).then((value) {
-            if (widget.task != null) { // if is update page, then update level
-              widget.task.level = value;
-            }
-            setState(() {
-              _currentLevel = value;
-            });
-          });
-        },
-        backgroundColor: Colors.cyan[100],
-        foregroundColor: Colors.lightBlue[300],
-        child: Icon(
-          Icons.color_lens,
-          size: 40,
-        ),
-      ),
+      floatingActionButton: CircleButton(
+        children: <Widget>[
+          IconButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => SimpleDialog(
+                  children: _getColorfulPanel(),
+                )
+              ).then((value) {
+                if (widget.task != null) { // if is update page, then update level
+                  widget.task.level = value;
+                }
+                setState(() {
+                  _currentLevel = value;
+                });
+              });
+            },
+            icon: Icon(
+              Icons.color_lens,
+              color: Colors.orange,
+            ),
+          ),
+          IconButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              print('date_range');
+            },
+            icon: Icon(
+              Icons.date_range,
+              color: Colors.pink,
+            ),
+          )
+        ],
+      )
     );
   }
 
@@ -116,6 +130,7 @@ class TaskEditState extends State<TaskEditPage> {
             Navigator.of(context, rootNavigator: true).pop(i);
           },
           child: Container(
+            padding: EdgeInsets.all(0),
             width: 100,
             height: 30,
             color: widget.colorLevels[i],
