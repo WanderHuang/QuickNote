@@ -60,62 +60,84 @@ class TaskEditState extends State<TaskEditPage> {
           )
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
-            child: TextField(
-              controller: _controllContent,
-              maxLines: 100,
-              decoration: InputDecoration(
-                hintText: appContentHolder,
-                hintStyle: appHolderTextStyle,
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.cyan[400],
-                    width: 2.0
+      body: GestureDetector(
+        onTap: () {
+          CircleButtonBloc.instance.goShrink();
+        },
+        child: ListView(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    '${DateTime.now().toUtc()}',
+                    style: TextStyle(
+                      fontSize: 16
+                    ),
+                  ),
+                  Text( // maybe replace with an Icon
+                    'Sunny'
                   )
-                )
+                ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+              child: TextField(
+                controller: _controllContent,
+                autofocus: widget.task == null,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration.collapsed(
+                  hintText: appContentHolder,
+                  hintStyle: appHolderTextStyle,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: CircleButton(
-        children: <Widget>[
-          IconButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) => SimpleDialog(
-                  children: _getColorfulPanel(),
-                )
-              ).then((value) {
-                if (widget.task != null) { // if is update page, then update level
-                  widget.task.level = value;
-                }
-                setState(() {
-                  _currentLevel = value;
+      floatingActionButton: BlocProvider(
+        bloc: CircleButtonBloc.instance,
+        child: CircleButton(
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => SimpleDialog(
+                    children: _getColorfulPanel(),
+                  )
+                ).then((value) {
+                  if (widget.task != null) { // if is update page, then update level
+                    widget.task.level = value;
+                  }
+                  setState(() {
+                    _currentLevel = value;
+                  });
                 });
-              });
-            },
-            icon: Icon(
-              Icons.color_lens,
-              color: Colors.orange,
+              },
+              icon: Icon(
+                Icons.color_lens,
+                color: Colors.orange,
+              ),
             ),
-          ),
-          IconButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
-              print('date_range');
-            },
-            icon: Icon(
-              Icons.date_range,
-              color: Colors.pink,
-            ),
-          )
-        ],
+            IconButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                print('date_range');
+              },
+              icon: Icon(
+                Icons.date_range,
+                color: Colors.pink,
+              ),
+            )
+          ],
+        ),
       )
     );
   }
