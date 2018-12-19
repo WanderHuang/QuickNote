@@ -21,6 +21,7 @@ class _TaskListState extends State<TaskList> {
   Widget build(BuildContext context) {
     TaskBloc _bloc = BlocProvider.of<TaskBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
+    double dragUpdateDistance;
     return BlocBuilder(
       bloc: _bloc,
       builder: (BuildContext context, TaskState state) {
@@ -30,19 +31,26 @@ class _TaskListState extends State<TaskList> {
               itemCount: state.list.length,
               scrollDirection: orientation == Orientation.landscape ? Axis.horizontal : Axis.vertical,
               itemBuilder: (BuildContext context int index) {
-                double start = 0;
                 Task current = state.list[index];
                 return GestureDetector(
                   onHorizontalDragStart: (DragStartDetails details) {
-                    start = details.globalPosition.distance;
+                    dragUpdateDistance = current.id == state.current ? state.currentPosition : 0;
                   },
                   onHorizontalDragEnd: (DragEndDetails details) {
-                    bool currentIsOpen = start > details.primaryVelocity;
-                    if (currentIsOpen) {
-                      _bloc.setCurrentTask(current.id);
+                    if (dragUpdateDistance < -30) {
+                      _bloc.updateCurrentPosition(current.id, -80);
                     } else {
-                      _bloc.setCurrentTask(-1);
+                      _bloc.updateCurrentPosition(current.id, 0);
                     }
+                    dragUpdateDistance = 0;
+                  },
+                  onHorizontalDragUpdate: (DragUpdateDetails details) {
+                    if (details.delta.direction > 0) { // <-- // [dragUpdateDistance] will always be negtive
+                      dragUpdateDistance -= details.delta.distance;
+                    } else { // -->
+                      dragUpdateDistance += details.delta.distance;
+                    }
+                    _bloc.updateCurrentPosition(current.id, dragUpdateDistance);
                   },
                   onDoubleTap: () async{
                     await Navigator.push(
@@ -62,7 +70,7 @@ class _TaskListState extends State<TaskList> {
                       alignment: AlignmentDirectional.topStart,
                       children: <Widget>[
                         Positioned(
-                          left: current.id == state.current ? -widget.itemButtonsWith : 0,
+                          left: current.id == state.current ? state.currentPosition : 0,
                           child: Container(
                             height: widget.itemHeight,
                             width: screenWidth + widget.itemButtonsWith,
@@ -125,9 +133,13 @@ class _TaskListState extends State<TaskList> {
                                 Container(
                                   width: widget.itemButtonsWith,
                                   height: widget.itemHeight,
-                                  child: Row(
+                                  child: Stack(
+                                    alignment: AlignmentDirectional(0, 0),
                                     children: <Widget>[
-                                      Flexible(
+                                      Positioned(
+                                        left: 0,
+                                        width: widget.itemButtonsWith * 0.5,
+                                        height: widget.itemHeight,
                                         child: RawMaterialButton(
                                           onPressed: () {
                                             current.marked = current.marked == 1 ? 0 : 1;
@@ -144,7 +156,10 @@ class _TaskListState extends State<TaskList> {
                                           ),
                                         ),
                                       ),
-                                      Flexible(
+                                      Positioned(
+                                        left: state.currentPosition.abs() / 2, // 0 -> 0 // -80 40
+                                        width: widget.itemButtonsWith * 0.5,
+                                        height: widget.itemHeight,
                                         child: RawMaterialButton(
                                           onPressed: () {
                                              _bloc.deleteCurrentTask(current.id);

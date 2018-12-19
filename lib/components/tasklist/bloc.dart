@@ -54,6 +54,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     this.dispatch(new UpdateTaskEvent(item));
   }
 
+  void updateCurrentPosition(int currentId, double currentPosition) {
+    this.dispatch(new UpdateCurrentPositionEvent(currentId, currentPosition));
+  }
+
   // handle by different event type
   Stream<TaskState> _stateHandler(TaskState state, TaskEvent event) async* {
     TaskState newState = state;
@@ -96,6 +100,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       }
       print('UPDATE is $success');
     }
+
+    if (event is UpdateCurrentPositionEvent) {
+      newState = TaskState(event.currentId, state.list);
+      newState.currentPosition = event.position;
+    }
+
     yield newState;
   }
 }

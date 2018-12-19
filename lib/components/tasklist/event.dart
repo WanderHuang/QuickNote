@@ -59,3 +59,13 @@ class UpdateTaskEvent extends TaskEvent {
     return 'UpdateTaskEvent';
   }
 }
+
+class UpdateCurrentPositionEvent extends TaskEvent {
+  int currentId;
+  double position;
+  UpdateCurrentPositionEvent(this.currentId, this.position);
+  @override
+  String toString() {
+    return 'UpdateCurrentPositionEvent [currentId=$currentId, postion=$position]';
+  }
+}

@@ -3,11 +3,12 @@ import 'package:quick_note/models/task.dart';
 /// all for state management
 class TaskState {
   int current = -1;
+  double currentPosition = 0;
   List<Task> list = [];
   TaskState(this.current, this.list);
 
   @override
     String toString() {
-      return 'TaskState[Current=$current, List=$list]';
+      return 'TaskState[Current=$current, currentPosition=$currentPosition, List=$list]';
     }
 }
