@@ -30,7 +30,7 @@ class _TaskListState extends State<TaskList> {
             return ListView.builder(
               itemCount: state.list.length,
               scrollDirection: orientation == Orientation.landscape ? Axis.horizontal : Axis.vertical,
-              itemBuilder: (BuildContext context int index) {
+              itemBuilder: (BuildContext context, int index) {
                 Task current = state.list[index];
                 return GestureDetector(
                   onHorizontalDragStart: (DragStartDetails details) {

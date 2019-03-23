@@ -13,7 +13,7 @@ dependencies:
   flutter_calendar_carousel: any
 
   cupertino_icons: ^0.1.2
-  flutter_bloc: ^0.4.6
+  flutter_bloc: ^0.8.0
   sqflite: ^0.13.0
 
 dev_dependencies:

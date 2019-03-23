@@ -40,6 +40,10 @@ A Flutter TODOLIST app demo. Made by [wander](!https://github.com/WanderHuang).
 - material design
 - sqlite
 
+## Demo Image
+
+![loading...](/images/note_demo_1.gif)
+
 ## Run
 - `flutter packages get`
 - `flutter run`

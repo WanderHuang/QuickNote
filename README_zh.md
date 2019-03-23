@@ -41,13 +41,25 @@
 - material design
 - sqlite
 
+## 示例图片
+
+![loading...](/images/note_demo_1.gif)
+
 ## Run
 - `flutter packages get`
 - `flutter run`
 
 ## TODO
-- 功能躲起来之后就可以考虑接入`firebase`，爽一把。
+- 功能多起来之后就可以考虑接入`firebase`，爽一把。
 - 界面设计更漂亮一点 :worried:
 - 增加`设置`
 - 增加`日历`
 - 增加更多...:joy:
+
+## 更多...
+
+中间空了两个月没做flutter了。
+
+今年计划用flutter好好写个app。
+
+建议大家去尝试使用flutter，打开一个新的世界。
