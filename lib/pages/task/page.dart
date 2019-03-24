@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quick_note/constants/index.dart' show appTitleTask, warnTitleNotNull, appContentHolder, appHolderTextStyle, rainbowColors, rainbowColorTexts;
 import 'package:quick_note/components/tasklist/index.dart' show TaskBloc;
 import 'package:quick_note/models/task.dart';
-import 'package:quick_note/components/dialog/warn.dart';
+import 'package:quick_note/components/common/dialog/warn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quick_note/components/circlebutton/index.dart';
 
@@ -40,7 +40,7 @@ class TaskEditState extends State<TaskEditPage> {
         title: Text(appTitleTask),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.send),
+            icon: Icon(Icons.save),
             color: widget.colorLevels[widget.task == null ? _currentLevel : widget.task.level],
             onPressed: () {
               String content = _controllContent.text;

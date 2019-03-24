@@ -1,0 +1,1 @@
+export 'package:quick_note/pages/drawer/page.dart';

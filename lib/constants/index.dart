@@ -4,6 +4,10 @@ final String appTitle = 'QuickNote';
 final String appTitleAdd = 'Create Note';
 final String appTitleTask = 'Task';
 final String appContentHolder = 'Quickly note down your ideas';
+final String appMotto = 'The meaning of life is that you live well for the people who love you,'
+' and struggle for the people that you love.(My motto)';
+final String appMail = 'wanderjie@gmail.com';
+final String appGithub = 'https://github.com/WanderHuang';
 
 /// db
 final String dbName = 'QuickNote-release-0.0.1.db';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quick_note/constants/index.dart' show appTitle;
 import 'package:quick_note/components/tasklist/index.dart';
 import 'package:quick_note/pages/task/index.dart';
+import 'package:quick_note/pages/drawer/index.dart';
 import 'dart:math';
 class HomePage extends StatelessWidget {
   final Random rand = new Random();
@@ -36,16 +37,7 @@ class HomePage extends StatelessWidget {
           );
         },
       ),
-      endDrawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'This is slider'
-            )
-          ],
-        ),
-      ),
+      endDrawer: DrawerPage(),
     );
   }
 }
